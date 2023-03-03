@@ -6,6 +6,9 @@
     align-items: center;
     padding-left: 112px;
     padding-right: 90px;
+
+    /* position: sticky;
+    top: 0; */
 }
 
 .header a {
@@ -26,3 +29,4 @@
     background: white;
     border: 2px solid orange;
 }
+
