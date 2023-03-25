@@ -2,35 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
-import {addToDb , getStoredCart} from '../../utilities/fakedb.js'
+import {addToDb , deleteShoppingCart, getStoredCart} from '../../utilities/fakedb.js'
+import { useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
-    const [products , setProducts] = useState([]);
+    const products = useLoaderData();
 
     const [cart , setCart] = useState([]);
 
-    useEffect( ()=>{
-        fetch('products.json')
-        .then(res => res.json())
-        .then(data => setProducts(data))
-    },[]);
+    const clearCart = ()=>{
+        setCart([]);
+        deleteShoppingCart();
+    }
 
-    // useEffect( () =>{
-    //     console.log('loacal storage first line',products);
-    //     const storeCart = getStoredCart();
-    //     const saveCart = [];
-    //     //console.log(storeCart);
-    //     for(const id in storeCart){
-    //         const addedProduct = products.find(product => product.id === id);
-    //         if(addedProduct){
-    //             const quantity = storeCart[id];
-    //             addedProduct.quantity=quantity;
-    //             saveCart.push(addedProduct);
-    //         }     
-    //     }
-    //     setCart(saveCart);
-    //     // console.log('local storage finish');
-    // },[products])
 
     useEffect(()=>{
         const storeCart = getStoredCart();
@@ -49,7 +33,7 @@ const Shop = () => {
     } ,[products])
 
     const handleAddToCart = (selectedProduct) =>{
-        console.log(selectedProduct);
+        //console.log(selectedProduct);
         let newCart =[];
 
         const exists = cart.find(product => product.id=== selectedProduct.id);
@@ -63,8 +47,6 @@ const Shop = () => {
             newCart=[...rest , exists];
         }
 
-       // cart.push(product);
-      
        setCart(newCart);
        addToDb(selectedProduct.id);
        
@@ -86,7 +68,7 @@ const Shop = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart cart={cart}></Cart>
+                <Cart clearCart={clearCart}  cart={cart}></Cart>
             </div>
         </div>
     );
