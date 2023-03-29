@@ -6,6 +6,7 @@ const Shipping = () => {
             <h2>shipping</h2>
             <p>delivery on the way !!!</p>
             <p><small>coming soon...</small></p>
+            <p>new one</p>
         </div>
     );
 };
