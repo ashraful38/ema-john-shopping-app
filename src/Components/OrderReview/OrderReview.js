@@ -36,7 +36,7 @@ const OrderReview = () => {
                     ></ReviewItem>)
                 }
                 {
-                    cart.length === 0 && <h2>No Items for review please shop <Link to='/'>Shop More</Link> </h2>
+                    cart.length === 0 && <h2 style={{textAlign:'center'}}>No Items for review please shop <Link to='/'>Shop More</Link> </h2>
                 }
 
                 
@@ -45,7 +45,11 @@ const OrderReview = () => {
 
             </div>
             <div className='cart-container'>
-                <Cart clearCart={clearCart} cart={cart}></Cart>
+                <Cart clearCart={clearCart} cart={cart}>
+                    <Link to='/shipping'>
+                        <button className='clear-cart'>Shipping</button>
+                    </Link>
+                </Cart>
             </div>
             
         </div>
